@@ -1,5 +1,5 @@
 import time
-
+from BST import BinarySearchTree as BST
 start_time = time.time()
 
 f = open('names_1.txt', 'r')
@@ -13,10 +13,23 @@ f.close()
 duplicates = []  # Return the list of duplicates in this data structure
 
 # Replace the nested for loops below with your improvements
-for name_1 in names_1:
-    for name_2 in names_2:
-        if name_1 == name_2:
-            duplicates.append(name_1)
+#For this problem we'll be using a binary search tree
+
+# for name_1 in names_1:
+#     for name_2 in names_2:
+#         if name_1 == name_2:
+#             duplicates.append(name_1)
+
+
+bst = BST(names_1[0])
+for i in names_1[1:]:
+    bst.insert(i)
+duplicates = []
+for k in names_2: 
+    if bst.contains(k):
+        duplicates.append(k)
+
+
 
 end_time = time.time()
 print (f"{len(duplicates)} duplicates:\n\n{', '.join(duplicates)}\n\n")

@@ -15,6 +15,8 @@ class Node:
     # set this node's next_node reference to the passed in node
     self.next_node = new_next
 
+
+
 class LinkedList:
   def __init__(self):
     # reference to the head of the list
@@ -26,6 +28,7 @@ class LinkedList:
       node.set_next(self.head)
     
     self.head = node
+
 
   def contains(self, value):
     if not self.head:
@@ -42,6 +45,22 @@ class LinkedList:
     # if we've gotten here, then the target node isn't in our list
     return False
 
+
   def reverse_list(self):
-    # TO BE COMPLETED
-    pass
+    #in a SLL every node only points to the node in front 
+    #we have to reverse the order of the pointers from the very end to the beginning 
+    #get to the end of the SLL and add last node to head of list, now the new penultimate one and so on 
+    if self.head is None or self.head.get_next() is None: 
+      return 
+      # [1] -> [2] -> [3] | prev -> cur -> next 
+    else: 
+      prev = self.head 
+      cur = prev.get_next()
+      prev.set_next(None)
+      while cur and cur.get_next(): 
+        nex = cur.get_next() 
+        cur.set_next(prev)
+        prev = cur
+        cur = nex 
+      cur.set_next(prev)
+      self.head = cur
